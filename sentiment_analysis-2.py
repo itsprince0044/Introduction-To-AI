@@ -143,6 +143,25 @@ nb_pipeline = Pipeline([
 nb_pipeline.fit(X_train, y_train)
 
 # ==========================================================
+# 📌 TF-IDF FEATURE TABLE (FOR REPORT)
+# ==========================================================
+
+# Extract trained TF-IDF vectorizer
+tfidf = nb_pipeline.named_steps["tfidf"]
+
+# Transform first 5 training samples
+sample_tfidf = tfidf.transform(X_train.iloc[:5])
+
+# Convert to DataFrame
+tfidf_df = pd.DataFrame(
+    sample_tfidf.toarray(),
+    columns=tfidf.get_feature_names_out()
+)
+
+# Display only first 20 features for readability
+print("\n===== TF-IDF FEATURE TABLE (Sample) =====")
+print(tfidf_df.iloc[:, :20])
+# ==========================================================
 # 8️⃣ TEST SET EVALUATION
 # ==========================================================
 
